@@ -1,0 +1,28 @@
+version: '3.7'
+
+services:
+    mysql:
+        container_name: prj_mysql2
+        image: mysql
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            MYSQL_DATABASE: db
+            MYSQL_PASSWORD: root
+        ports: 
+            - "4000:3306"
+    main:
+        container_name: main_backend2
+        build:
+            context: .
+            target: development
+        restart: always
+        volumes:
+            - .:/usr/src/app
+            - /usr/src/app/node_modules
+        ports:
+            - 3000:3000
+            - 9229:9229
+        command: npm run start:dev
+        depends_on:
+            - mysql
