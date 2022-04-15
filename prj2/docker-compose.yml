@@ -2,7 +2,7 @@ version: '3.7'
 
 services:
     mysql:
-        container_name: prj_mysql2
+        container_name: prj_mysqlc2
         image: mysql
         restart: always
         environment:
@@ -12,7 +12,7 @@ services:
         ports: 
             - "4000:3306"
     main:
-        container_name: main_backend2
+        container_name: main_backendc2
         build:
             context: .
             target: development

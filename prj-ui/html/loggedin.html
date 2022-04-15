@@ -22,7 +22,7 @@
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item"><a class="nav-link" href="contact-info\contact-info.html">Add contact info</a></li>
-                        <li class="nav-item"><a class="nav-link" href="preview.html">Sign out</a></li>
+                        <li class="nav-item"><a class="nav-link" href="preview.html" id="sign-out">Sign out</a></li>
                     </ul>
                 </div>
             </div>
@@ -69,7 +69,7 @@
                     <div class="p-5">
                         <h2 class="display-4">We salute you!</h2>
                         <p>Choosing is the first step, have you found your dream pet? If yes, sign up for adoption here.</p>
-                        <a type="button" class="btn btn-primary btn-xl rounded-pill mt-15" href="#">Adopt</a>
+                        <a class="btn btn-primary btn-xl rounded-pill mt-5" type="button" data-bs-toggle="modal" data-bs-target="#adoptModal">Adopt</a>
                     </div>
                 </div>
             </div>
@@ -114,6 +114,23 @@
             </div>
             <div class="modal-body">
                 <p id="contact-info"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary rounded-pill" data-bs-dismiss="modal">Confirm</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="adoptModal" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Pet information</h5>
+                <button type="button" class="close btn btn-primary" data-bs-dismiss="modal">X</button>
+            </div>
+            <div class="modal-body">
+                <p> Recommended for you! <br> Try out find pets first! </p>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary rounded-pill" data-bs-dismiss="modal">Confirm</button>

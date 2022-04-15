@@ -1,7 +1,7 @@
 import { ApiProperty } from "@nestjs/swagger";
 
 export class creContactInfo{
-    @ApiProperty()
+    @ApiProperty({required: false})
     phoneNumber: number;
     
     @ApiProperty({required: false})

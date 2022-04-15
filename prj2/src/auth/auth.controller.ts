@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, Request, UseGuards } from '@nestjs/common';
+import { Body, Controller, Get, Post, Request, Res, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { ApiBadRequestResponse, ApiBearerAuth, ApiCreatedResponse, ApiTags } from '@nestjs/swagger';
 import { CreateUserDto } from 'src/user/dto/user.dto';
@@ -27,12 +27,9 @@ export class AuthController {
     @UseGuards(AuthGuard('local'))
     @Post('login')
     async login(@Body() login: userLogin, @Request() req){
-        const token = this.authService.login(req.user);
-        console.log((await token).access_token)
+        const token = await this.authService.getJwtToken(req.user);
         return token;
     }
-
-
     
     @UseGuards(JwtAuthGuard)
     @ApiBearerAuth()

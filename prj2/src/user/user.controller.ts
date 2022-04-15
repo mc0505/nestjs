@@ -1,6 +1,9 @@
-import { Controller, Get, Post, Body, Param, UseGuards, Request, Delete, NotFoundException, Inject, forwardRef} from "@nestjs/common";
+import { Controller, Get, Post, Body, Param, UseGuards, Request, Delete, NotFoundException, Inject, forwardRef, Patch} from "@nestjs/common";
+import { AuthGuard } from "@nestjs/passport";
 import { ApiBadRequestResponse, ApiBearerAuth, ApiCreatedResponse, ApiOkResponse, ApiTags } from "@nestjs/swagger";
+import { request } from "express";
 import { JwtAuthGuard } from "src/auth/jwt-auth.guard";
+import { AdoptPet } from "src/pet/pet.entity";
 import { creContactInfo} from "../contact-info/dto/contact-info.dto";
 import { User } from "./user.entity";
 import { UserService } from "./user.service";
@@ -13,8 +16,8 @@ constructor(
     ) {}
 
     @UseGuards(JwtAuthGuard)
-    @ApiBadRequestResponse()
     @ApiBearerAuth()
+    @ApiBadRequestResponse()
     @Get('protected')
     getId(@Request() req){
         const id = req.user.id;
@@ -23,9 +26,9 @@ constructor(
 
 
     @UseGuards(JwtAuthGuard)
+    @ApiBearerAuth()
     @ApiOkResponse({type: User})
     @ApiBadRequestResponse()
-    @ApiBearerAuth()
     @Get('check-user-profile')
     async checkUserContactInfo(@Request() req){
         const id = this.getId(req);
@@ -37,9 +40,9 @@ constructor(
     }
 
     @UseGuards(JwtAuthGuard)
+    @ApiBearerAuth()
     @ApiOkResponse({type: User})
     @ApiBadRequestResponse()
-    @ApiBearerAuth()
     @Get('check-pet-profile')
     async checkUserPetInfo(@Request() req){
         const id = this.getId(req);
@@ -51,8 +54,8 @@ constructor(
     }
 
     @UseGuards(JwtAuthGuard)
-    @ApiOkResponse({type: User, description: "user's id"})
     @ApiBearerAuth()
+    @ApiOkResponse({type: User, description: "user's id"})
     @Delete('remove-user')
     removePet(@Request() req) {
         const id = this.getId(req);
@@ -60,11 +63,20 @@ constructor(
     }
     
     @UseGuards(JwtAuthGuard)
-    @ApiOkResponse({type: creContactInfo, description: "user's id"})
     @ApiBearerAuth()
+    @ApiOkResponse({type: creContactInfo, description: "user's id"})
     @Post('add-contact-info')
     async addContactInfo(@Body() addContactInfo: creContactInfo, @Request() req: number){
         const id = this.getId(req);
         return this.userService.createContactInfo(addContactInfo, id);
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @ApiBearerAuth()
+    @ApiOkResponse({type: AdoptPet, description: "pet's id"})
+    @Patch('adopt')
+    async adoptPet(@Body() adoptPet: AdoptPet, @Request() req){
+        const id = this.getId(req);
+        return this.userService.adoptPet(adoptPet, id);
     }
 }

@@ -1,4 +1,5 @@
 import { Request, Get, Post, Body, Param, Delete, Controller, NotFoundException, Patch, UseGuards } from "@nestjs/common";
+import { AuthGuard } from "@nestjs/passport";
 import { ApiBadRequestResponse, ApiBearerAuth, ApiCreatedResponse, ApiNotFoundResponse, ApiOkResponse, ApiQuery, ApiResponseProperty, ApiTags } from "@nestjs/swagger";
 import { JwtAuthGuard } from "src/auth/jwt-auth.guard";
 import { CreatePetDto } from "./dto/pet.dto";
@@ -24,8 +25,8 @@ constructor(private readonly petService: PetService) {}
     }
 
     @UseGuards(JwtAuthGuard)
-    @ApiOkResponse({type: Pet, description: "pet's id"})
     @ApiBearerAuth()
+    @ApiOkResponse({type: Pet, description: "pet's id"})
     @ApiNotFoundResponse()
     @Get(':id/find-pet')
     async findOnePet(@Param('id') id: number) {
@@ -36,8 +37,8 @@ constructor(private readonly petService: PetService) {}
     }
 
     @UseGuards(JwtAuthGuard)
-    @ApiCreatedResponse({ type: Pet })
     @ApiBearerAuth()
+    @ApiCreatedResponse({ type: Pet })
     @ApiBadRequestResponse()
     @Post('add-pet')
     createPet(@Body() createPetDto: CreatePetDto) {
@@ -52,8 +53,8 @@ constructor(private readonly petService: PetService) {}
     }
 
     @UseGuards(JwtAuthGuard)
-    @ApiCreatedResponse({type: UpdatePet})
     @ApiBearerAuth()
+    @ApiCreatedResponse({type: UpdatePet})
     @Patch(':id/update-pet-profile')
     async updatePet(@Body() updatePet: UpdatePet, petId: number) {
         return await this.petService.updatePet(updatePet, petId);
