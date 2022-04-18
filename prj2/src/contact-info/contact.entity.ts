@@ -8,9 +8,9 @@ export class ContactInfo{
     @ApiProperty()
     id: number;
 
-    @Column({nullable: true})
+    @Column()
     @ApiProperty()
-    phoneNumber: number;
+    phoneNumber1: number;
 
     @Column({nullable: true})
     @ApiProperty()

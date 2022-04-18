@@ -17,7 +17,6 @@ $(function() {
             url: 'http://localhost:3000/Auth/login',
             data: signinUser,
             success: function(data){
-                console.log(data)
                 localStorage.setItem('token', data);
                 window.location = "../loggedin.html"
             },

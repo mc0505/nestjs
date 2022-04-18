@@ -2,7 +2,6 @@ $(function() {
 
     var $email = $('#email');
     var $phoneNumber1 = $('#phone-number1');
-    console.log($phoneNumber1);
     var $phoneNumber2 = $('#phone-number2');
     
 
@@ -19,6 +18,8 @@ $(function() {
             phoneNumber2: $phoneNumber2.val(),
             email: $email.val(),
         };
+        console.log($phoneNumber1.val())
+        console.log(userContact);
 
         const token = localStorage.getItem('token');
 
@@ -28,8 +29,8 @@ $(function() {
             headers: {'Authorization': 'Bearer ' + token},
             data: userContact,
             success: function() {
-                console.log(userContact)
-                // window.location = "../loggedin.html"
+                console.log(userContact);
+                window.location = "../loggedin.html"
             },
             error: function(){
                 alert('Error')

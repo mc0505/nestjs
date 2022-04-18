@@ -1,7 +1,5 @@
-import { Controller, Get, Post, Body, Param, UseGuards, Request, Delete, NotFoundException, Inject, forwardRef, Patch} from "@nestjs/common";
-import { AuthGuard } from "@nestjs/passport";
+import { Controller, Get, Post, Body, Param, UseGuards, Request, Delete, NotFoundException, Patch} from "@nestjs/common";
 import { ApiBadRequestResponse, ApiBearerAuth, ApiCreatedResponse, ApiOkResponse, ApiTags } from "@nestjs/swagger";
-import { request } from "express";
 import { JwtAuthGuard } from "src/auth/jwt-auth.guard";
 import { AdoptPet } from "src/pet/pet.entity";
 import { creContactInfo} from "../contact-info/dto/contact-info.dto";
@@ -75,8 +73,9 @@ constructor(
     @ApiBearerAuth()
     @ApiOkResponse({type: AdoptPet, description: "pet's id"})
     @Patch('adopt')
-    async adoptPet(@Body() adoptPet: AdoptPet, @Request() req){
+    async adoptPet(@Body() petId: AdoptPet, @Request() req){
         const id = this.getId(req);
-        return this.userService.adoptPet(adoptPet, id);
+        console.log(petId)
+        return this.userService.adoptPet(petId, id);
     }
 }

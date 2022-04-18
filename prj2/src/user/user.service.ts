@@ -81,14 +81,19 @@ export class UserService {
         return user;    
     }
 
-    async adoptPet(adoptPet, userID): Promise<any>{
-        const user = await this.userRepo.findOne(userID);
-        const pet = await this.petRepo.findOne(adoptPet.petID);
-        user.pets=[pet];
-        await this.userRepo.save(user)
-        pet.ownerId = userID;
-        await this.petRepo.save(pet)
-        return user;
+    async adoptPet(petId, userId): Promise<any>{
+        const user = await this.userRepo.findOne(userId);
+        console.log(petId)
+        const pet = await this.petRepo.findOne(petId);
+        const contact = await this.checkUserContactInfo(userId) || undefined;
+        if(contact !== undefined){
+            user.pets=[pet];
+            await this.userRepo.save(user)
+            pet.ownerId = userId;
+            await this.petRepo.save(pet)
+            return user;
+        }
+        return false;
     }
 }
 
