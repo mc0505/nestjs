@@ -57,7 +57,6 @@ export class UserService {
         .createQueryBuilder('pet')
         .select(['*']).where("pet.ownerId = :userId", {userId})
         let userPet = await query.getRawMany();
-        console.log(userPet)
         return userPet;
     }
 
