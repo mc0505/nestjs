@@ -4,7 +4,7 @@ $(function() {
 
     $.ajax({
         type: 'Get',
-        url: 'http://localhost:3000/Pet/find-all',
+        url: 'http://35.164.243.187:3000/Pet/find-all',
         success: function(data){
             $.each(data, function(i, pet) {
                 $pets.append('<div class="card-body col-lg-4">'+
@@ -28,7 +28,7 @@ async function reply_click(clicked_id){
 
     $.ajax({
         type: 'Patch',
-        url: 'http://localhost:3000/User/adopt',
+        url: 'http://35.164.243.187:3000/User/adopt',
         data: petId,
         headers: {"Authorization": ' Bearer ' + token},
         success: function(){

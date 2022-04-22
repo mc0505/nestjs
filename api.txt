@@ -1,48 +1,48 @@
 GET
 
-http://localhost:3000/Pet/find-all
+http://35.164.243.187:3000/Pet/find-all
  => find all pets
 
-http://localhost:3000/(Pet/User)/protected
+http://35.164.243.187:3000/(Pet/User)/protected
  => get logged in user's id
 
-http://localhost:3000/Pet/:id/find-pet
+http://35.164.243.187:3000/Pet/:id/find-pet
  => find pet by id
 
-http://localhost:3000/User/check-user-profile
+http://35.164.243.187:3000/User/check-user-profile
  => check logged in user's contact profile (contact info)
 
-http://localhost:3000/User/check-pet-profile
+http://35.164.243.187:3000/User/check-pet-profile
  => check logged in user's pet profile (pet info)
 
 Post
 
-http://localhost:3000/Pet/add-pet
+http://35.164.243.187:3000/Pet/add-pet
  => add new pet
 
-http://localhost:3000/User/sign-up
+http://35.164.243.187:3000/Auth/sign-up
  => sign up
 
-http://localhost:3000/User/log-in
+http://35.164.243.187:3000/User/log-in
  => log in
 
-http://localhost:3000/User/add-contact-info
+http://35.164.243.187:3000/User/add-contact-info
  => add contact info for current logged in user
 
 
 Delete
 
-http://localhost:3000/Pet/:id/remove-pet
+http://35.164.243.187:3000/Pet/:id/remove-pet
  => remove pet by id
 
-http://localhost:3000/User/remove-user
+http://35.164.243.187:3000/User/remove-user
  => remove current logged in user profile
 
 
 Patch
 
-http://localhost:3000/Pet/:id/update-pet-profile
+http://35.164.243.187:3000/Pet/:id/update-pet-profile
  => update pet's profile
 
-http://localhost:3000/Pet/:id/adpot-pet
+http://35.164.243.187:3000/Pet/:id/adpot-pet
  => adopt a pet

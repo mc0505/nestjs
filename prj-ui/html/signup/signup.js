@@ -19,7 +19,7 @@ $(function() {
 
             $.ajax({
                 type: 'POST',
-                url: 'http://localhost:3000/Auth/sign-up',
+                url: 'http://35.164.243.187:3000/Auth/sign-up',
                 data: signupUser,
                 success: function(newUser) {
                     console.log(signupUser)
