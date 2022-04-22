@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { ContactInfo } from 'src/contact-info/contact.entity';
-import {  Repository } from 'typeorm';
+import {  Any, Repository } from 'typeorm';
 import { Pet } from '../pet/pet.entity';
 import { CreateUserDto } from './dto/user.dto';
 import { User } from './user.entity';
@@ -30,6 +30,10 @@ export class UserService {
         return id[0].id;
     }
 
+    async findOnePet(id: number): Promise<Pet> {
+        return await this.petRepo.findOne(id);
+    }
+
     async createUser(createUserDto: CreateUserDto): Promise<User>{
         let id = await this.getMaxUserID();
         id ++;
@@ -48,11 +52,12 @@ export class UserService {
         return userContact;
     }
 
-    async checkUserPet(userId: number): Promise<Pet>{
+    async checkUserPet(userId: number){
         const query = this.petRepo
         .createQueryBuilder('pet')
         .select(['*']).where("pet.ownerId = :userId", {userId})
-        let userPet = await query.getRawOne();
+        let userPet = await query.getRawMany();
+        console.log(userPet)
         return userPet;
     }
 
@@ -82,18 +87,21 @@ export class UserService {
     }
 
     async adoptPet(petId, userId): Promise<any>{
-        const user = await this.userRepo.findOne(userId);
-        console.log(petId)
-        const pet = await this.petRepo.findOne(petId);
+        let petlist = await this.checkUserPet(userId);
+        const user = await this.userRepo.findOne(userId)
+        let pet = await this.findOnePet(petId);
         const contact = await this.checkUserContactInfo(userId) || undefined;
-        if(contact !== undefined){
-            user.pets=[pet];
+        if( pet.ownerId !== null){
+            return 1;
+        }else if(contact !== undefined){
+            petlist.push(pet);
+            user.pets = petlist;
             await this.userRepo.save(user)
             pet.ownerId = userId;
             await this.petRepo.save(pet)
             return user;
         }
-        return false;
+        return 2;
     }
 }
 

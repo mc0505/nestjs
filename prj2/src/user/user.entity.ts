@@ -25,6 +25,7 @@ export class User{
     @OneToOne(() => ContactInfo, contactInfo => contactInfo.user)
     contactInfo: ContactInfo;
 
+    @ApiProperty()
     @OneToMany(() => Pet, pet => pet.owner)
     pets: Pet[];
 }

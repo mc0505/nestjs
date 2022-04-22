@@ -41,6 +41,20 @@ constructor(
     @ApiBearerAuth()
     @ApiOkResponse({type: User})
     @ApiBadRequestResponse()
+    @Get('check-user-profile')
+    async checkUserPet(@Request() req){
+        const id = this.getId(req);
+        const userPet = await this.userService.checkUserPet(id);
+        if(!userPet){
+            return {mesg: "No pet yet!"};
+        }
+        return userPet;
+    }
+
+    @UseGuards(JwtAuthGuard)
+    @ApiBearerAuth()
+    @ApiOkResponse({type: User})
+    @ApiBadRequestResponse()
     @Get('check-pet-profile')
     async checkUserPetInfo(@Request() req){
         const id = this.getId(req);
@@ -55,9 +69,9 @@ constructor(
     @ApiBearerAuth()
     @ApiOkResponse({type: User, description: "user's id"})
     @Delete('remove-user')
-    removePet(@Request() req) {
+    async removeUser(@Request() req) {
         const id = this.getId(req);
-        return this.userService.deleteUser(id);
+        return await this.userService.deleteUser(id);
     }
     
     @UseGuards(JwtAuthGuard)
@@ -75,7 +89,13 @@ constructor(
     @Patch('adopt')
     async adoptPet(@Body() petId: AdoptPet, @Request() req){
         const id = this.getId(req);
-        console.log(petId)
-        return this.userService.adoptPet(petId, id);
+        const petid = petId.petID;
+        const result = await this.userService.adoptPet(petid, id);
+        if(result == 1){
+            return {mesg: 'This pet has already been adopted!'}
+        } else if (result == 2){
+            return {mesg: 'Please update ypur contact first!'}
+        }
+        return result;
     }
 }

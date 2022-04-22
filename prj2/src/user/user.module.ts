@@ -5,6 +5,7 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './user.entity';
 import { Pet } from 'src/pet/pet.entity';
 import { ContactInfo } from 'src/contact-info/contact.entity';
+import { PetModule } from 'src/pet/pet.module';
 
 @Module({
   imports: [TypeOrmModule.forFeature([User, Pet, ContactInfo])],
