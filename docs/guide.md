@@ -10,22 +10,18 @@
 This project infrastructure consists of mainly 1 frontend and 1 backend service:
 ![image](pics/yo.png)
 
-
-# Prerequisites:
-
 Backend:
 
--	Hosted by NestJs, a powerful server-side NodeJs framework with:
-    -	Swagger to describe RESTful APIs under leveraging formats.
-    -	TypeOrm and MySQL for database management and control.
-    -	Passport-jwt for authentication and authorization.
-    -	Docker is used to easier build, wider share.
+-	Written by NestJs, a powerful server-side NodeJs framework with:
+    -	Swagger, TypeOrm and MySQL
+    -	Passport-jwt
+    -	Docker
     -	Class-validator, guards, exception filters, and more NestJs function are in use.
 
 Frontend:
 -   This website landing page consists of a front-end constructed by HTML5, CSS, JavaScript and a variety of potent frameworks and libraries namely Bootstrap, JQuery, Ajax.
 
-Deploy globally:
+Deploy:
 -	Create an AWS account to deploy your website.
 
 
@@ -61,10 +57,10 @@ Deploy globally:
 -	To run frontend on localhost, simply open folder prj-ui on File Explorer and run file index.html
 
 
-# Deploy globally:
+# Deploy:
 
 Backend:
--	There are 2 main services by AWS that support this website to deploy globally (AWS RDS and EC2)
+-	There are 2 main services by AWS that support this website to deploy (AWS RDS and EC2)
 
 -	RDS: 
     -	For setting up, operating and scaling a relational database in the cloud.
