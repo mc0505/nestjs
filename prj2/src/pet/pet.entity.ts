@@ -55,5 +55,5 @@ export class UpdatePet{
 
 export class AdoptPet{
     @ApiProperty()
-    petID: number;
+    id: number;
 }

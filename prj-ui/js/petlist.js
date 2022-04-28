@@ -4,7 +4,7 @@ $(function() {
 
     $.ajax({
         type: 'Get',
-        url: 'http://35.164.243.187:3000/Pet/find-all',
+        url: 'http://localhost:3000/Pet/find-all',
         success: function(data){
             $.each(data, function(i, pet) {
                 $pets.append('<div class="card-body col-lg-4">'+
@@ -20,7 +20,7 @@ $(function() {
 
 
 async function reply_click(clicked_id){
-    const id = await clicked_id;
+    const id = Number(await clicked_id);
     const token = localStorage.getItem('token');
     var petId = {
         id
@@ -28,11 +28,17 @@ async function reply_click(clicked_id){
 
     $.ajax({
         type: 'Patch',
-        url: 'http://35.164.243.187:3000/User/adopt',
+        url: 'http://localhost:3000/User/adopt',
         data: petId,
         headers: {"Authorization": ' Bearer ' + token},
-        success: function(){
-            alert("Adopt successfully");
+        success: function(data){
+            console.log(petId)
+            if(data == 1)
+                alert('This pet has already been adopted.')
+            else if(data == 2)
+                alert('Please update ypur contact first!')
+            else
+                alert('Adopt successfully')
         }
     });
 }

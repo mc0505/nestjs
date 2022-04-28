@@ -89,12 +89,11 @@ constructor(
     @Patch('adopt')
     async adoptPet(@Body() petId: AdoptPet, @Request() req){
         const id = this.getId(req);
-        const petid = petId.petID;
-        const result = await this.userService.adoptPet(petid, id);
+        const result = await this.userService.adoptPet(Number(petId.id), id);
         if(result == 1){
-            return {mesg: 'This pet has already been adopted!'}
+            return 1;
         } else if (result == 2){
-            return {mesg: 'Please update ypur contact first!'}
+            return 2;
         }
         return result;
     }

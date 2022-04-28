@@ -14,7 +14,7 @@ $(function() {
 
         $.ajax({
             type: 'POST',
-            url: 'http://35.164.243.187:3000/Auth/login',
+            url: 'http://localhost:3000/Auth/login',
             data: signinUser,
             success: function(data){
                 localStorage.setItem('token', data);

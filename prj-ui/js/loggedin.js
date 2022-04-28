@@ -5,7 +5,7 @@ $(function() {
 
     $.ajax({
         type: 'Get',
-        url: 'http://35.164.243.187:3000/User/check-user-profile',
+        url: 'http://localhost:3000/User/check-user-profile',
         headers: {'Authorization': 'Bearer ' + token},
         success: function(data){
             $contactInfo.append('<p> ID: ' + data.userId

@@ -85,9 +85,9 @@ export class UserService {
         return user;    
     }
 
-    async adoptPet(petId, userId): Promise<any>{
+    async adoptPet(petId: number, userId: number): Promise<any>{
         let petlist = await this.checkUserPet(userId);
-        const user = await this.userRepo.findOne(userId)
+        const user = await this.userRepo.findOne(userId);
         let pet = await this.findOnePet(petId);
         const contact = await this.checkUserContactInfo(userId) || undefined;
         if( pet.ownerId !== null){
